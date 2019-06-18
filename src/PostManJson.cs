@@ -103,8 +103,8 @@ namespace AliLogToPostmanJson
                                 {
                                     Raw = "{{DPHOST}}" + m2.Uri.LocalPath,
                                     Host = new List<string> { "{{DPHOST}}" },
-                                    Path = m2.Uri.LocalPath.Split('/'),
-                                    Query = GetQuery(m2.Uri)
+                                    Path = m2.Uri.LocalPath.Split('/',StringSplitOptions.RemoveEmptyEntries),
+                                    Query = query
                                 }
                             },
                             Event = new List<Event> { @event }
@@ -122,8 +122,8 @@ namespace AliLogToPostmanJson
                                 {
                                     Raw = "{{DPHOST}}" + m2.Uri.LocalPath,
                                     Host = new List<string> { "{{DPHOST}}" },
-                                    Path = m2.Uri.LocalPath.Split('/'),
-                                    Query = GetQuery(m2.Uri)
+                                    Path = m2.Uri.LocalPath.Split('/', StringSplitOptions.RemoveEmptyEntries),
+                                    Query = query
                                 },
                                 Body = new BodyByUrlencoded
                                 {
