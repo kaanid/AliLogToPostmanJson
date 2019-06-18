@@ -54,7 +54,7 @@ namespace AliLogToPostmanJson
                                         "\r",
                                         "pm.test(\"Succeed is true\", function () {\r",
                                         "    var jsonData = pm.response.json();\r",
-                                        "    pm.expect(jsonData.succeed).to.eql(true)\r",
+                                        "    pm.expect(jsonData.Succeed).to.eql(true)\r",
                                         "});\r",
                                         "\r",
                                         "pm.test(\"Data is exist\", function () {\r",
@@ -65,7 +65,11 @@ namespace AliLogToPostmanJson
                 }
             };
             postmanJasonModel.Event = new List<Event> { @event };
-
+            var cookie_Aspnet_session = new Header {
+                Key= "cookie",
+                Value= "ASP.NET_SessionId={{DP_Session}};",
+                Type="text"
+            };
 
             var list2 = listDistinct.GroupBy(m => m.DirName);
             foreach (var m in list2)
@@ -101,13 +105,13 @@ namespace AliLogToPostmanJson
                             {
                                 Url = new UrlModel
                                 {
-                                    Raw = "{{DPHOST}}" + m2.Uri.LocalPath,
-                                    Host = new List<string> { "{{DPHOST}}" },
+                                    Raw = "{{DP_HOST}}" + m2.Uri.LocalPath,
+                                    Host = new List<string> { "{{DP_HOST}}" },
                                     Path = m2.Uri.LocalPath.Split('/',StringSplitOptions.RemoveEmptyEntries),
                                     Query = query
-                                }
-                            },
-                            Event = new List<Event> { @event }
+                                },
+                                Header=new List<Header> { cookie_Aspnet_session  }
+                            }
                         };
                     }
                     else
@@ -120,8 +124,8 @@ namespace AliLogToPostmanJson
                             {
                                 Url = new UrlModel
                                 {
-                                    Raw = "{{DPHOST}}" + m2.Uri.LocalPath,
-                                    Host = new List<string> { "{{DPHOST}}" },
+                                    Raw = "{{DP_HOST}}" + m2.Uri.LocalPath,
+                                    Host = new List<string> { "{{DP_HOST}}" },
                                     Path = m2.Uri.LocalPath.Split('/', StringSplitOptions.RemoveEmptyEntries),
                                     Query = query
                                 },
@@ -131,7 +135,8 @@ namespace AliLogToPostmanJson
                                     {
 
                                     }
-                                }
+                                },
+                                Header = new List<Header> { cookie_Aspnet_session }
                             },
                         };
                     }
