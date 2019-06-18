@@ -148,6 +148,10 @@ namespace AliLogToPostmanJson
 
                 postmanJasonModel.Item.Add(dir1);
             }
+
+            Console.WriteLine($"get:{getCount}");
+            Console.WriteLine($"post:{postCount}");
+            Console.WriteLine($"filePath:{filePath}");
         }
         private List<KeyValuePair<string, string>> GetQuery(Uri uri)
         {
